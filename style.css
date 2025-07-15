@@ -1,0 +1,658 @@
+/* CSS variables for easy theme customization */
+:root {
+    --primary-color: #2E8B57; /* Seagreen - Main theme color */
+    --secondary-color: #87CEEB; /* Sky Blue - Accent for some elements/headings */
+    --accent-color: #B0E0E6; /* Powder Blue - For highlights and active states */
+    --text-color: #333;
+    --background-color: #F0F2F5; /* Light Grey Blue - General page background */
+    --card-background: #ffffff; /* White - Background for main content cards */
+    --border-color: #ddd;
+    --hover-color: #257A4A; /* Darker Seagreen for hover effects */
+    --shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Enhanced shadow for depth */
+    --border-radius: 12px; /* Slightly more rounded corners */
+
+    /* Animation specific colors */
+    --comparing-color: #FFD700; /* Gold/Yellow for elements being compared */
+    --pivot-color: #9370DB; /* Medium Purple for pivot in Quick Sort */
+    --sorted-color: #1a7a40; /* Darker green for sorted elements */
+    --inserted-color: #7FFF00; /* Chartreuse for inserted elements */
+    --deleted-color: #FF6347; /* Tomato for deleted elements */
+}
+
+/* Universal box-sizing and margin/padding reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Body styling: font, line-height, color, background, flex layout for sticky footer */
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensures footer sticks to bottom */
+    overflow-x: hidden; /* Prevent horizontal scroll on animations */
+}
+
+/* Header styling: background, text color, padding, centering, shadow */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1.8rem 0; /* Slightly more padding */
+    text-align: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    z-index: 10; /* Ensure header is above other content */
+}
+
+header h1 {
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 0.6rem;
+    font-size: 2.8em; /* Larger heading for impact */
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+header p {
+    font-size: 1.2em;
+    opacity: 0.95; /* Slightly more opaque */
+}
+
+/* Navigation bar styling: dark background, padding, shadow, flex for centering links */
+nav {
+    background-color: #34495e; /* Dark blue-grey for contrast */
+    padding: 1rem 0; /* More padding */
+    box-shadow: var(--shadow);
+    position: sticky; /* Sticky navigation */
+    top: 0;
+    z-index: 9; /* Below header */
+}
+
+nav ul {
+    list-style: none; /* Remove bullet points */
+    display: flex;
+    justify-content: center; /* Center navigation items */
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
+
+nav ul li {
+    margin: 0 1.8rem; /* More spacing between navigation items */
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none; /* Remove underline */
+    font-weight: 600;
+    padding: 0.7rem 1.2rem; /* More padding */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease; /* Smooth hover and click effect */
+    border-radius: var(--border-radius);
+    font-family: 'Montserrat', sans-serif;
+    white-space: nowrap; /* Prevent topic names from breaking */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: block; /* Make the whole padding area clickable */
+}
+
+/* Navigation link hover and active state styling */
+nav ul li a:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-3px); /* Lift effect on hover */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+nav ul li a.active {
+    background-color: var(--hover-color);
+    color: var(--accent-color); /* Powder blue for active link text */
+    transform: scale(1.05); /* Slightly enlarge active link */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+}
+
+/* Main content area styling: flex for centering, max-width, background, shadow, border-radius */
+main {
+    flex: 1; /* Allows main content to grow and push footer down */
+    display: flex;
+    justify-content: center;
+    padding: 2.5rem; /* More padding */
+    max-width: 1200px; /* Limit content width for readability */
+    margin: 2.5rem auto; /* Center the main content block */
+    background-color: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden; /* Hide overflow during transitions */
+}
+
+/* Styling for content sections (introduction + operations) */
+.content-section {
+    width: 100%;
+    opacity: 0; /* Start invisible for fade-in effect */
+    transform: translateY(30px); /* Start slightly below for slide-up effect */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out; /* Smoother transition */
+    display: none; /* Hidden by default, shown by JS when active */
+    padding: 1rem; /* Inner padding for content sections */
+}
+
+.content-section.active {
+    opacity: 1;
+    transform: translateY(0);
+    display: block; /* Show the content section */
+}
+
+/* Welcome section specific styling */
+.welcome-section {
+    text-align: center;
+    padding: 4rem; /* More padding */
+}
+
+.welcome-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 2.5em; /* Larger */
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.welcome-section p {
+    font-size: 1.15em; /* Slightly larger */
+    margin-bottom: 1.2rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Headings within content sections */
+.content-section h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 2.2em;
+    border-bottom: 3px solid var(--primary-color); /* Thicker underline effect */
+    padding-bottom: 0.8rem;
+    text-align: center;
+}
+
+.content-section h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--secondary-color); /* Sky Blue for subheadings */
+    margin-top: 2rem; /* More space above */
+    margin-bottom: 1rem;
+    font-size: 1.7em;
+    border-bottom: 1px dashed var(--secondary-color); /* Dashed underline */
+    padding-bottom: 0.4rem;
+}
+
+.content-section p {
+    margin-bottom: 1.2rem;
+    font-size: 1.08em;
+}
+
+.content-section ul {
+    list-style-type: disc;
+    margin-left: 25px; /* More indent */
+    margin-bottom: 1.5rem;
+}
+
+.content-section ul li {
+    margin-bottom: 0.6rem;
+}
+
+/* Code block styling */
+.code-block {
+    background-color: #eef3f7; /* Lighter blue-grey background */
+    border-left: 6px solid var(--primary-color); /* Thicker primary color left border */
+    padding: 1.2rem;
+    margin: 1.5rem 0;
+    font-family: 'Fira Code', monospace; /* Monospaced font for code */
+    white-space: pre-wrap; /* Preserve whitespace and wrap text */
+    word-break: break-all; /* Break long words */
+    border-radius: var(--border-radius);
+    overflow-x: auto; /* Allow horizontal scrolling for long lines */
+    box-shadow: inset 0 0 8px rgba(0,0,0,0.05); /* Inner shadow */
+}
+
+/* Operation section styling: distinct background, border, padding */
+.operations-section {
+    background-color: #f7f9fb; /* Very light background */
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 2rem; /* More padding */
+    margin-top: 3rem; /* More space above */
+    box-shadow: var(--shadow);
+}
+
+/* Operation selection buttons */
+.operation-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 2rem;
+    justify-content: center;
+}
+
+.operation-selector button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.operation-selector button:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.operation-selector button.active {
+    background-color: var(--secondary-color); /* Sky Blue for active operation */
+    color: white;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+}
+
+/* Individual operation content blocks */
+.operation-content {
+    display: none; /* Hidden by default, shown by JS */
+    padding: 1.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    background-color: var(--background-color); /* Use light background for content */
+    margin-top: 1.5rem;
+    animation: fadeIn 0.6s ease-out; /* Fade in when displayed */
+}
+.operation-content.active {
+    display: block;
+}
+
+
+.operations-section label {
+    display: block; /* Each label on its own line */
+    margin-bottom: 0.6rem;
+    font-weight: 700; /* Bolder label */
+    color: var(--primary-color); /* Primary color for labels */
+    font-size: 1.05em;
+}
+
+/* Input field styling */
+.operations-section input[type="text"],
+.operations-section input[type="number"] {
+    width: calc(100% - 24px); /* Full width minus padding */
+    padding: 0.9rem; /* More padding */
+    margin-bottom: 1.2rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px; /* Slightly more rounded inputs */
+    font-size: 1.05em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.operations-section input[type="text"]:focus,
+.operations-section input[type="number"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(46, 139, 87, 0.2); /* Focus ring with primary color opacity */
+    outline: none;
+}
+
+
+/* Button styling */
+.operations-section .action-button { /* Specific class for action buttons within operation content */
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 1rem 2rem; /* Larger buttons */
+    border-radius: 8px; /* More rounded buttons */
+    cursor: pointer; /* Indicate clickable */
+    font-size: 1.1em;
+    font-weight: 700; /* Bolder text */
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Smooth hover and click */
+    margin-right: 0.8rem; /* More spacing */
+    margin-bottom: 0.8rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Button shadow */
+}
+
+.operations-section .action-button:hover {
+    background-color: var(--hover-color);
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+}
+
+.operations-section .action-button:active {
+    transform: translateY(0); /* Press down effect */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Result message styling (success) */
+.operations-section .result {
+    background-color: #e6ffe6; /* Very light green */
+    border: 1px solid var(--primary-color); /* Primary color border */
+    padding: 1.2rem;
+    margin-top: 2rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    color: #1a7a40; /* Darker green text */
+    white-space: pre-wrap;
+    overflow-x: auto;
+    display: none; /* Hidden by default, shown by JS */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Error message styling */
+.operations-section .error {
+    background-color: #ffe6e6; /* Very light red */
+    border: 1px solid var(--secondary-color); /* Secondary color border */
+    padding: 1.2rem;
+    margin-top: 2rem;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    color: #b30000; /* Darker red text */
+    display: none; /* Hidden by default, shown by JS */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Visualization container for arrays, stacks, queues, linked lists */
+.visualization-container {
+    margin-top: 2rem;
+    border: 2px dashed var(--border-color); /* Thicker dashed border */
+    padding: 1.5rem;
+    min-height: 80px; /* Ensure it's visible even when empty */
+    border-radius: var(--border-radius);
+    display: flex;
+    flex-wrap: wrap; /* Allow elements to wrap */
+    align-items: center;
+    gap: 15px; /* More space between elements */
+    overflow-x: auto; /* Allow horizontal scrolling if many elements */
+    background-color: #fcfdff; /* Slightly different background */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+/* Styling for individual array/stack/queue elements */
+.array-element {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.7rem 1.4rem; /* More padding */
+    border-radius: 8px; /* More rounded */
+    font-weight: 600;
+    transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease; /* Smoother transitions including opacity */
+    display: inline-flex; /* For proper spacing */
+    align-items: center;
+    justify-content: center;
+    min-width: 50px; /* Ensure visibility for small numbers */
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    animation: fadeIn 0.5s ease-out; /* Fade in animation */
+}
+
+/* Array animation specific classes */
+.array-element.comparing {
+    background-color: var(--comparing-color);
+    color: var(--text-color);
+    transform: scale(1.05);
+}
+.array-element.pivot {
+    background-color: var(--pivot-color);
+    color: white;
+    transform: scale(1.1);
+}
+.array-element.sorted {
+    background-color: var(--sorted-color);
+    color: white;
+}
+.array-element.inserted {
+    background-color: var(--inserted-color);
+    color: var(--text-color);
+    animation: fadeIn 0.5s ease-out;
+}
+.array-element.deleted {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+
+/* Styling for linked list nodes */
+.list-node {
+    background-color: var(--secondary-color); /* Sky Blue for linked list nodes */
+    position: relative;
+    padding-right: 30px; /* More space for arrow */
+    color: white;
+    padding: 0.7rem 1.4rem;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.4s ease, transform 0.4s ease, box-shadow 0.4s ease, opacity 0.4s ease; /* Smoother transitions including opacity */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 50px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+    animation: fadeIn 0.5s ease-out; /* Fade in animation */
+}
+
+/* Linked List animation specific classes */
+.list-node.highlight {
+    background-color: var(--accent-color); /* Powder Blue highlight */
+    transform: scale(1.15) translateY(-5px); /* More pronounced lift and enlarge */
+    box-shadow: 0 8px 16px rgba(176, 224, 230, 0.6); /* Powder Blue glow */
+    animation: pulse 0.8s infinite alternate; /* Pulsing animation */
+}
+.list-node.inserted {
+    background-color: var(--inserted-color);
+    color: var(--text-color);
+    animation: fadeIn 0.5s ease-out;
+}
+.list-node.deleted {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+
+/* Binary Tree Visualization (Graphical) */
+.tree-visualization {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    min-height: 200px;
+    border-radius: var(--border-radius);
+    background-color: #fcfdff;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+    display: flex;
+    justify-content: center; /* Center the root node */
+    align-items: flex-start;
+    overflow-x: auto; /* Allow horizontal scrolling for wide trees */
+    overflow-y: auto; /* Allow vertical scrolling for deep trees */
+    position: relative; /* For positioning nodes */
+}
+
+.tree-node-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    padding: 10px; /* Padding around each node for spacing */
+}
+
+.tree-node {
+    background-color: var(--secondary-color); /* Sky Blue for tree nodes */
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%; /* Circular nodes */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.1em;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    z-index: 2; /* Ensure node is above lines */
+}
+
+.tree-node.highlight {
+    background-color: var(--accent-color); /* Powder Blue highlight for traversal */
+    color: var(--text-color);
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(176, 224, 230, 0.8);
+}
+.tree-node.inserted {
+    background-color: var(--inserted-color);
+    color: var(--text-color);
+    animation: fadeInNode 0.5s ease-out;
+}
+.tree-node.deleted {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Basic positioning for children - This is a simplified approach */
+/* For complex auto-layout, a library like D3.js would be needed */
+.tree-node-children {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px; /* Space between levels */
+}
+
+.tree-node-children .tree-node-container {
+    flex: 1; /* Distribute space evenly */
+    text-align: center;
+}
+
+/* Lines (simplified, conceptual connections) */
+/* A more robust solution would involve SVG lines drawn dynamically based on node positions */
+.tree-node-container::before {
+    content: '';
+    position: absolute;
+    top: 50px; /* From parent node bottom */
+    left: 50%;
+    width: 2px;
+    height: 20px; /* Length of the vertical line */
+    background-color: var(--border-color);
+    z-index: 1;
+    transform: translateX(-50%);
+}
+
+.tree-node-children .tree-node-container:first-child::before {
+    /* Left child line */
+    content: '';
+    position: absolute;
+    top: -20px; /* Relative to child, goes up to parent */
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background-color: var(--border-color);
+    transform: translateX(-50%) rotate(45deg); /* Angle for left child */
+    transform-origin: top center;
+    z-index: 1;
+}
+
+.tree-node-children .tree-node-container:last-child::before {
+    /* Right child line */
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background-color: var(--border-color);
+    transform: translateX(-50%) rotate(-45deg); /* Angle for right child */
+    transform-origin: top center;
+    z-index: 1;
+}
+
+
+/* Footer styling */
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 0; /* More padding */
+    font-size: 0.95em;
+    margin-top: 3rem; /* More space above footer */
+    box-shadow: 0 -4px 8px rgba(0,0,0,0.1); /* Top shadow */
+}
+
+footer p {
+    margin: 0.3rem 0;
+}
+
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeInNode {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+    from { transform: scale(1.15) translateY(-5px); box-shadow: 0 8px 16px rgba(176, 224, 230, 0.6); }
+    to { transform: scale(1.1) translateY(-3px); box-shadow: 0 6px 12px rgba(176, 224, 230, 0.3); }
+}
+
+/* Responsive Design: Adjust layout for smaller screens */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: center; /* Center them */
+    }
+
+    nav ul li {
+        margin: 0.7rem 0; /* Adjust vertical margin */
+    }
+
+    main {
+        margin: 1.5rem; /* Reduce side margins */
+        padding: 1.5rem; /* Reduce padding */
+    }
+
+    header h1 {
+        font-size: 2.2em; /* Smaller header on mobile */
+    }
+
+    header p {
+        font-size: 1.05em;
+    }
+
+    .operations-section .action-button,
+    .operation-selector button {
+        width: 100%; /* Full width buttons */
+        margin-right: 0;
+        margin-bottom: 1rem; /* More space between stacked buttons */
+    }
+
+    .operations-section input[type="text"],
+    .operations-section input[type="number"] {
+        width: 100%; /* Full width inputs */
+    }
+
+    .welcome-section {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+    nav ul li a {
+        padding: 0.6rem 1rem; /* Smaller padding for nav links */
+        font-size: 0.9em;
+    }
+    .content-section h2 {
+        font-size: 1.8em;
+    }
+    .content-section h3 {
+        font-size: 1.3em;
+    }
+    .tree-node {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9em;
+    }
+}
